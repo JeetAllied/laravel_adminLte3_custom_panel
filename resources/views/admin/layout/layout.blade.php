@@ -1,3 +1,7 @@
+<!-- to prevent browser back button redirect after logout -->
+@php
+    session_start();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
