@@ -7,6 +7,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- csrf token for ajax request -->
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
     <title>AdminLTE 3 | Dashboard 2</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -86,6 +88,20 @@
                 $(this).remove();
             });
         }, 4000);
+
+        var url = window.location;
+        // for single sidebar menu
+        $('ul.nav-sidebar a').filter(function () {
+            return this.href == url;
+        }).addClass('active');
+
+        // for sidebar menu and treeview
+        $('ul.nav-treeview a').filter(function () {
+            return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview")
+            .css({'display': 'block'})
+            .addClass('menu-open').prev('a')
+            .addClass('active');
     });
 
     @if(Session::has('msg'))
